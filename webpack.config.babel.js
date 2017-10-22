@@ -8,7 +8,7 @@ export default [
     target: 'node',
     output: {
       path: path.resolve(process.cwd(), 'build'),
-      filename: 'index.js'
+      filename: 'index.js',
     },
     externals: (() => {
       return Object.keys(manifest.dependencies).reduce((acc, cur) => {
@@ -21,12 +21,12 @@ export default [
         {
           test: /(\.mjs|\.js)$/,
           use: { loader: 'babel-loader' },
-          exclude: /node_modules/
-        }
-      ]
+          exclude: /node_modules/,
+        },
+      ],
     },
     resolve: {
-      extensions: ['.js', '.json', '.mjs']
-    }
-  }
+      extensions: ['.js', '.json', '.mjs'],
+    },
+  },
 ]
