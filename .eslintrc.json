@@ -1,9 +1,11 @@
 {
   "extends": [
-    "eslint:recommended"
+    "react-app",
+    "plugin:jsx-a11y/recommended"
   ],
   "plugins": [
-    "prettier"
+    "prettier",
+    "jsx-a11y"
   ],
   "env": {
     "browser": true,

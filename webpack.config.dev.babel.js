@@ -21,29 +21,43 @@ export default {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        loader: 'babel-loader',
+        enforce: 'pre',
+        loader: 'eslint-loader',
         include: appPath,
         options: {
-          babelrc: false,
-          presets: ['babel-preset-react-app'],
-          // This is a feature of `babel-loader` for webpack (not Babel itself).
-          // It enables caching results in ./node_modules/.cache/babel-loader/
-          // directory for faster rebuilds.
-          cacheDirectory: true,
+          ignore: false,
+          useEslintrc: true,
         },
       },
       {
-        test: /\.css$/,
-        use: [
-          'style-loader',
-          { loader: 'css-loader', options: { importLoaders: 1 } },
+        oneOf: [
+          {
+            test: /\.(js|jsx)$/,
+            loader: 'babel-loader',
+            include: appPath,
+            options: {
+              babelrc: false,
+              presets: ['babel-preset-react-app'],
+              // This is a feature of `babel-loader` for webpack (not Babel itself).
+              // It enables caching results in ./node_modules/.cache/babel-loader/
+              // directory for faster rebuilds.
+              cacheDirectory: true,
+            },
+          },
+          {
+            test: /\.css$/,
+            use: [
+              'style-loader',
+              { loader: 'css-loader', options: { importLoaders: 1 } },
+            ],
+          },
         ],
       },
     ],
   },
   plugins: [
     new webpack.EnvironmentPlugin({
-      NODE_ENV: 'development',
+      NODE_ENV: process.env.NODE_ENV,
     }),
     new HtmlWebpackPlugin({
       inject: true,
