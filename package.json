@@ -7,20 +7,29 @@
   "author": "Yotau Hong <crazymousethief@outlook.com>",
   "license": "MIT",
   "scripts": {
-    "build": "webpack",
-    "server": "webpack && node build"
+    "start": "npm run dev",
+    "dev": "NODE_ENV=development npx webpack-dev-server --config webpack.config.dev.babel.js",
+    "build": "npx webpack",
+    "server": "npx webpack && node build"
   },
   "dependencies": {
     "fastify": "^0.30.2",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
     "serve-static": "^1.13.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
+    "babel-preset-react-app": "^3.0.3",
+    "css-loader": "^0.28.7",
     "eslint": "^4.9.0",
     "eslint-plugin-prettier": "^2.3.1",
+    "html-webpack-plugin": "^2.30.1",
     "prettier": "^1.7.4",
-    "webpack": "^3.8.1"
+    "style-loader": "^0.19.0",
+    "webpack": "^3.8.1",
+    "webpack-dev-server": "^2.9.3"
   }
 }
