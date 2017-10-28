@@ -5,6 +5,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin'
 const appPath = path.resolve(process.cwd(), 'app')
 
 export default {
+  devtool: 'cheap-module-source-map',
   context: appPath,
   target: 'web',
   entry: './src/index.js',
@@ -32,6 +33,14 @@ export default {
       {
         oneOf: [
           {
+            test: /\.(png|jpe?g|gif|bmp|svg)$/,
+            loader: 'url-loader',
+            options: {
+              limit: 8192,
+              name: 'static/media/[name].[hash:8].[ext]',
+            },
+          },
+          {
             test: /\.(js|jsx)$/,
             loader: 'babel-loader',
             include: appPath,
@@ -48,8 +57,22 @@ export default {
             test: /\.css$/,
             use: [
               'style-loader',
-              { loader: 'css-loader', options: { importLoaders: 1 } },
+              {
+                loader: 'css-loader',
+                options: {
+                  importLoaders: 1,
+                  modules: true,
+                  sourceMap: true,
+                },
+              },
             ],
+          },
+          {
+            exclude: [/\.js$/, /\.html$/, /\.json$/],
+            loader: 'file-loader',
+            options: {
+              name: 'static/media/[name].[hash:8].[ext]',
+            },
           },
         ],
       },
