@@ -9,9 +9,9 @@
   "scripts": {
     "start": "npm run build && npm run server",
     "dev":
-      "NODE_ENV=development npx webpack-dev-server --config webpack.config.dev.babel.js",
+      "export NODE_ENV=development && npx webpack-dev-server --config webpack.config.dev.babel.js",
     "build":
-      "NODE_ENV=production npx webpack && npx webpack --config webpack.config.dev.babel.js",
+      "export NODE_ENV=production && npx webpack && npx webpack --config webpack.config.dev.babel.js",
     "server": "node dist"
   },
   "dependencies": {
