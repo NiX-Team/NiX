@@ -7,7 +7,7 @@ export default [
     entry: './index.mjs',
     target: 'node',
     output: {
-      path: path.resolve(process.cwd(), 'build'),
+      path: path.resolve(process.cwd(), 'dist'),
       filename: 'index.js',
     },
     externals: (() => {

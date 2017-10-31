@@ -10,10 +10,10 @@ export default {
   target: 'web',
   entry: './src/index.js',
   output: {
-    path: path.resolve(process.cwd(), 'build'),
+    path: path.resolve(process.cwd(), 'dist'),
     pathinfo: true,
-    filename: 'static/js/bundle.js',
-    chunkFilename: 'static/js/[name].chunk.js',
+    filename: 'assets/js/bundle.js',
+    chunkFilename: 'assets/js/[name].chunk.js',
   },
   resolve: {
     extensions: ['.js', '.json', '.jsx'],
@@ -37,7 +37,7 @@ export default {
             loader: 'url-loader',
             options: {
               limit: 8192,
-              name: 'static/media/[name].[hash:8].[ext]',
+              name: 'assets/media/[name].[hash:8].[ext]',
             },
           },
           {
@@ -71,7 +71,7 @@ export default {
             exclude: [/\.js$/, /\.html$/, /\.json$/],
             loader: 'file-loader',
             options: {
-              name: 'static/media/[name].[hash:8].[ext]',
+              name: 'assets/media/[name].[hash:8].[ext]',
             },
           },
         ],
@@ -88,7 +88,7 @@ export default {
     }),
   ],
   devServer: {
-    contentBase: path.join(__dirname, 'build'),
+    contentBase: path.join(__dirname, 'dist'),
     compress: true,
     port: 3000,
   },
