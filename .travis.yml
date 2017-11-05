@@ -1,0 +1,25 @@
+language: node_js
+env:
+  global:
+    - NODE_ENV=production
+cache: yarn
+node_js:
+  - 8
+install:
+  - yarn
+script:
+  - echo -e "TRAVIS_REPO_SLUG=$TRAVIS_REPO_SLUG \n TRAVIS_BUILD_DIR=$TRAVIS_BUILD_DIR \n TRAVIS_PULL_REQUEST=$TRAVIS_PULL_REQUEST \n TRAVIS_PULL_REQUEST_BRANCH=$TRAVIS_PULL_REQUEST_BRANCH \n TRAVIS_BRANCH=$TRAVIS_BRANCH \n TRAVIS_TAG=$TRAVIS_TAG \n "
+  - yarn run build
+notifications:
+  slack:
+    secure: EF+07SBh23p+9ji3USD45jlgSe6ubLpUbCUVGhpF56+eio4xBhHaXpIkj7R7z82UaJ0VY9LyGzG1ESlISZ776iEN9R8OPY+FO1OYdTxFC41O+/lwI/vApoFniCk6idtpXYn1ayK03bwH878xwt9n6iiDnNYBr/F48G9kYhEmZDtA+wuRkfJoroksVgnyR7QPmNJzTN4py9zWLWulYXgf40aa/3/UMIb+oUM5PvsV5ilHthHkYIG5SynilVk28cpWuzApabNouufRsABZKNx21L3xDwP6AddEqE0FD1qrLsl9Fg2NsjyRoFetfxvBvmjTboJH6jX6QmjxaZag6kOtmLLk02QkldwFHGvHX2bsL0q8Ej5q4HBxNVYm6NmlOqHPJ0z8KnKKvf1gE/kcxPG9M7Osudd86+AoYd9D94QIU1GWoaDlZ4iKJLqFKJrb84RgNg2IQN2JVtXi+pzsQEu6q4wOXRv8b2UdajwL9FiOXILn7stTAy/EM156JLvYJ2ST8ZgdwGLjSMshXsZTAVtqzBnGG+LgU9MJgHu/0QCGBTBNx1Nya7vOx5EqKmaK1My3GICiM0FhIKf2hX3OaFcFdxaEq2SJXRL7E7PJ0xfZbplrtLQwqZfNicDUTqc8sl1er7V+Iz9bj2bFh71Io20uSAKgvJCsfNyKO2P4MxLBgJw=
+
+deploy:
+  target_branch: master
+  repo: nix-team/nix-team.github.io
+  local_dir: dist
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  on:
+    branch: master
