@@ -1,6 +1,7 @@
 import webpack from 'webpack'
 import path from 'path'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
+import CopyWebpackPlugin from 'copy-webpack-plugin'
 
 const appPath = path.resolve(process.cwd())
 
@@ -11,6 +12,7 @@ export default {
   entry: './src/index.js',
   output: {
     path: path.resolve(process.cwd(), 'dist'),
+    publicPath: '/',
     pathinfo: true,
     filename: 'assets/js/bundle.js',
     chunkFilename: 'assets/js/[name].chunk.js',
@@ -32,14 +34,6 @@ export default {
       },
       {
         oneOf: [
-          {
-            test: /\.(png|jpe?g|gif|bmp|svg)$/,
-            loader: 'url-loader',
-            options: {
-              limit: 8192,
-              name: 'assets/media/[name].[hash:8].[ext]',
-            },
-          },
           {
             test: /\.(js|jsx)$/,
             loader: 'babel-loader',
@@ -86,6 +80,16 @@ export default {
       inject: true,
       template: path.resolve(appPath, 'public/index.html'),
     }),
+    new CopyWebpackPlugin(
+      [
+        {
+          from: 'public',
+        },
+      ],
+      {
+        ignore: ['*.html'],
+      },
+    ),
   ],
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
