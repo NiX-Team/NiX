@@ -1,2 +1,3 @@
 # NiX
-The Nix Team Blog
+
+The NiX Team Blog
